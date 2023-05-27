@@ -34,6 +34,8 @@ def calc_cell(window): #komórka do wpisywania obliczeń
 
 
 def calc_buttons(window, cell): #ustawia ustawia cyfry i operatory działań
+    symbols = ['7', '8', '9', '/', '\u21BA', 'C', '4', '5', '6', '*', '(', ')', '1', '2', '3', '-', 'x^2', '\u221Ax',
+               '0', ',', '%', '+']
     buttons = []
 
     button_7 = tk.Button(window, text='7', bg='white', borderwidth=0)
@@ -192,7 +194,7 @@ def graph_btn(window): #button przejścia do graficznego
     graph_button.grid(row=40, column=1, columnspan=6, ipadx=20, ipady=20, pady=10)
     window.grid_columnconfigure(2, weight=1)
 
-    def calc_cell(graph_window):
+    def calc_graph_cell(graph_window):
         g_cell = tk.Entry(graph_window, borderwidth=3, highlightcolor='white', justify='center')
         g_cell.grid(row=1, columnspan=6, ipadx=50, ipady=10)
         graph_window.grid_columnconfigure(0, weight=1)
@@ -200,12 +202,12 @@ def graph_btn(window): #button przejścia do graficznego
         return g_cell
 
     return graph_button, graph_window
-
+'''
 def plot_this():
     fun = calc_cell(graph_btn(window)[1])
     wykres = plt(fun)
     wykres.show()
-
+'''
 
 #button_plt = tk.Button(graph_window, text='Pokaż wykres', command=plot_this())
 #button_plt.grid(row=6, column=4, columnspan=2, ipadx=64, ipady=21)
