@@ -2,6 +2,17 @@
 # -*- coding: utf-8 -*-
 import tkinter as tk
 
+from sympy import *
+from sympy.plotting import plot
+x = Symbol('x')
+
+import matplotlib
+matplotlib.use("TkAgg")
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from matplotlib.figure import Figure
+
+from plot import *
+
 def calculator(): #tworzy okno kalkulatora
     window = tk.Tk()
 
@@ -78,14 +89,18 @@ def graph_btn(window): #button przejścia do graficznego
         g_cell.grid(row=1, columnspan=6, ipadx=50, ipady=10)
         graph_window.grid_columnconfigure(0, weight=1)
         g_cell.configure(font=("Calibri", 14))
-
         return g_cell
 
     return graph_button, graph_window
 
+def plot_this():
+    fun = calc_cell(graph_btn(window)[1])
+    wykres = plt(fun)
+    wykres.show()
 
 
-
+#button_plt = tk.Button(graph_window, text='Pokaż wykres', command=plot_this())
+#button_plt.grid(row=6, column=4, columnspan=2, ipadx=64, ipady=21)
 
 if __name__ == '__main__':
     window = calculator()
