@@ -194,23 +194,28 @@ def graph_btn(window): #button przejścia do graficznego
     graph_button.grid(row=40, column=1, columnspan=6, ipadx=20, ipady=20, pady=10)
     window.grid_columnconfigure(2, weight=1)
 
-    def calc_graph_cell(graph_window):
-        g_cell = tk.Entry(graph_window, borderwidth=3, highlightcolor='white', justify='center')
-        g_cell.grid(row=1, columnspan=6, ipadx=50, ipady=10)
-        graph_window.grid_columnconfigure(0, weight=1)
-        g_cell.configure(font=("Calibri", 14))
-        return g_cell
-
     return graph_button, graph_window
-'''
-def plot_this():
-    fun = calc_cell(graph_btn(window)[1])
-    wykres = plt(fun)
-    wykres.show()
-'''
 
-#button_plt = tk.Button(graph_window, text='Pokaż wykres', command=plot_this())
-#button_plt.grid(row=6, column=4, columnspan=2, ipadx=64, ipady=21)
+def calc_graph_cell(graph_window):
+    g_cell = tk.Entry(graph_window, borderwidth=3, highlightcolor='white', justify='center')
+    g_cell.grid(row=1, columnspan=6, ipadx=50, ipady=10)
+    graph_window.grid_columnconfigure(0, weight=1)
+    g_cell.configure(font=("Calibri", 14))
+    g_cell_value = g_cell.get()
+    #print(g_cell_value)
+    return g_cell, g_cell_value
+
+def graph_this_btn(graph_window):
+    button = tk.Button(graph_window, text='Pokaż wykres', command=plot_this)
+    button.grid(row=6, column=0, ipadx=10, ipady=5)
+    return button
+
+def plot_this():
+    window = calculator()
+    graph_window = (graph_btn(window))[1]
+    fun = (calc_graph_cell(graph_window))[1]
+    plt(fun)
+
 
 if __name__ == '__main__':
     window = calculator()
@@ -219,6 +224,9 @@ if __name__ == '__main__':
     history_text = calc_history(window)
     graph_button, graph_window = graph_btn(window)
 
-    g_cell = calc_cell(graph_window)
+    #g_cell = calc_cell(graph_window)
+
+    graph_this_button = graph_this_btn(graph_window)
+    graph_cell = calc_graph_cell(graph_window)[0]
 
     window.mainloop()

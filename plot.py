@@ -82,6 +82,6 @@ def plt(fun, lim1=-10.0, lim2=10.0, ylim1=-10.0, ylim2=10.0):
     wykres = plot(fun_br, xlim=[lim1, lim2], ylim=[ylim1, ylim2], line_color='C0', title="", legend=False, xlabel="x", ylabel="y")
 
 
-plt(log(x)+x**2-3*x+2-10/x)
+#plt(log(x)+x**2-3*x+2-10/x)
 
 
