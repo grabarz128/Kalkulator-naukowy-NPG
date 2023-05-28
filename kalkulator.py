@@ -5,7 +5,7 @@ import tkinter as tk
 def calculator(): #tworzy okno kalkulatora
     window = tk.Tk()
 
-    window.geometry('420x800')
+    window.geometry('400x500')
     window.title('Kalkulator prosty')
     window.configure(bg='LightSkyBlue1')
 
@@ -23,54 +23,171 @@ def calc_cell(window): #komórka do wpisywania obliczeń
 
 
 def calc_buttons(window, cell): #ustawia ustawia cyfry i operatory działań
-    symbols = ['7', '8', '9', '/', '\u21BA', 'C', '4', '5', '6', '*', '(', ')', '1', '2', '3', '-', 'x^2', '\u221Ax',
-               '0', ',', '%', '+']
+    buttons = []
 
-    buttons = [tk.Button(window, text = icon, bg = 'white', borderwidth = 0) for icon in symbols]
+    button_7 = tk.Button(window, text='7', bg='white', borderwidth=0)
+    button_7.grid(row=3, column=0, ipadx=10, ipady=5)
+    button_7.configure(width=5, height=2, font=("Calibri", 13))
+    buttons.append(button_7)
+
+    button_8 = tk.Button(window, text='8', bg='white', borderwidth=0)
+    button_8.grid(row=3, column=1, ipadx=10, ipady=5)
+    button_8.configure(width=5, height=2, font=("Calibri", 13))
+    buttons.append(button_8)
+
+    button_9 = tk.Button(window, text='9', bg='white', borderwidth=0)
+    button_9.grid(row=3, column=2, ipadx=10, ipady=5)
+    button_9.configure(width=5, height=2, font=("Calibri", 13))
+    buttons.append(button_9)
+
+    button_divide = tk.Button(window, text='/', bg='white', borderwidth=0)
+    button_divide.grid(row=3, column=3, ipadx=10, ipady=5)
+    button_divide.configure(width=5, height=2, font=("Calibri", 13))
+    buttons.append(button_divide)
+
+    button_back = tk.Button(window, text='\u21BA', bg='white', borderwidth=0)
+    button_back.grid(row=3, column=4, ipadx=10, ipady=5)
+    button_back.configure(width=5, height=2, font=("Calibri", 13))
+    buttons.append(button_back)
+
+    button_clr = tk.Button(window, text='C', bg='white', borderwidth=0)
+    button_clr.grid(row=3, column=5, ipadx=10, ipady=5)
+    button_clr.configure(width=5, height=2, font=("Calibri", 13))
+    buttons.append(button_clr)
+
+
+    button_4 = tk.Button(window, text='4', bg='white', borderwidth=0)
+    button_4.grid(row=4, column=0, ipadx=10, ipady=5)
+    button_4.configure(width=5, height=2, font=("Calibri", 13))
+    buttons.append(button_4)
+
+    button_5 = tk.Button(window, text='5', bg='white', borderwidth=0)
+    button_5.grid(row=4, column=1, ipadx=10, ipady=5)
+    button_5.configure(width=5, height=2, font=("Calibri", 13))
+    buttons.append(button_5)
+
+    button_6 = tk.Button(window, text='6', bg='white', borderwidth=0)
+    button_6.grid(row=4, column=2, ipadx=10, ipady=5)
+    button_6.configure(width=5, height=2, font=("Calibri", 13))
+    buttons.append(button_6)
+
+    button_multiply = tk.Button(window, text='*', bg='white', borderwidth=0)
+    button_multiply.grid(row=4, column=3, ipadx=10, ipady=5)
+    button_multiply.configure(width=5, height=2, font=("Calibri", 13))
+    buttons.append(button_multiply)
+
+    button_leftbracket = tk.Button(window, text='(', bg='white', borderwidth=0)
+    button_leftbracket.grid(row=4, column=4, ipadx=10, ipady=5)
+    button_leftbracket.configure(width=5, height=2, font=("Calibri", 13))
+    buttons.append(button_leftbracket)
+
+    button_rightbracket = tk.Button(window, text=')', bg='white', borderwidth=0)
+    button_rightbracket.grid(row=4, column=5, ipadx=10, ipady=5)
+    button_rightbracket.configure(width=5, height=2, font=("Calibri", 13))
+    buttons.append(button_rightbracket)
+
+    button_1 = tk.Button(window, text='1', bg='white', borderwidth=0)
+    button_1.grid(row=5, column=0, ipadx=10, ipady=5)
+    button_1.configure(width=5, height=2, font=("Calibri", 13))
+    buttons.append(button_1)
+
+    button_2 = tk.Button(window, text='2', bg='white', borderwidth=0)
+    button_2.grid(row=5, column=1, ipadx=10, ipady=5)
+    button_2.configure(width=5, height=2, font=("Calibri", 13))
+    buttons.append(button_2)
+
+    button_3 = tk.Button(window, text='3', bg='white', borderwidth=0)
+    button_3.grid(row=5, column=2, ipadx=10, ipady=5)
+    button_3.configure(width=5, height=2, font=("Calibri", 13))
+    buttons.append(button_3)
+
+    button_minus = tk.Button(window, text='/', bg='white', borderwidth=0)
+    button_minus.grid(row=5, column=3, ipadx=10, ipady=5)
+    button_minus.configure(width=5, height=2, font=("Calibri", 13))
+    buttons.append(button_minus)
+
+    button_pow = tk.Button(window, text='x^2', bg='white', borderwidth=0)
+    button_pow.grid(row=5, column=4, ipadx=10, ipady=5)
+    button_pow.configure(width=5, height=2, font=("Calibri", 13))
+    buttons.append(button_pow)
+
+    button_sqrt = tk.Button(window, text='\u221Ax', bg='white', borderwidth=0)
+    button_sqrt.grid(row=5, column=5, ipadx=10, ipady=5)
+    button_sqrt.configure(width=5, height=2, font=("Calibri", 13))
+    buttons.append(button_sqrt)
+
+
+    button_0 = tk.Button(window, text='0', bg='white', borderwidth=0)
+    button_0.grid(row=6, column=0, ipadx=10, ipady=5)
+    button_0.configure(width=2, height=2, font=("Calibri", 13))
+    buttons.append(button_0)
+
+    button_comma = tk.Button(window, text=',', bg='white', borderwidth=0)
+    button_comma.grid(row=6, column=1, ipadx=10, ipady=5)
+    button_comma.configure(width=5, height=2, font=("Calibri", 13))
+    buttons.append(button_comma)
+
+    button_percent = tk.Button(window, text='%', bg='white', borderwidth = 0)
+    button_percent.grid(row=6, column=2, ipadx=10, ipady=5)
+    button_percent.configure(width=5, height=2, font=("Calibri", 13))
+    buttons.append(button_percent)
+
+    button_plus = tk.Button(window, text='+', bg='white', borderwidth=0)
+    button_plus.grid(row=6, column=3, ipadx=0, ipady=5)
+    button_plus.configure(width=5, height=2, font=("Calibri", 13))
+    buttons.append(button_plus)
 
     j = 2
     for i in range(len(buttons)):
         if i % 6 == 0:
             j += 1
+        margin = 0 if len(symbols[i]) == 1 else 10
+        buttons[i].grid(row=j, column=i % 6,  ipady=5)
 
-        margin = 10 if len(symbols[i]) == 1 else 10
-        buttons[i].grid(row = j, column = i % 6, ipadx = margin, ipady = 5)
-        buttons[i].configure(width=5, height=2, font=("Calibri", 13))
+    equal_sign = tk.Button(window, text='=', bg='white', borderwidth=0)
+    equal_sign.grid(row=6, column=4, columnspan=2, ipadx=64, ipady=21)
 
-    equal_sign = tk.Button(window, text = '=', bg = 'white', borderwidth = 0)
-    equal_sign.grid(row = 6, column = 4, columnspan = 2, ipadx = 64, ipady = 21)
-
+    buttons.append(equal_sign)
 
     return buttons
 
 
-def calc_history(window): #10 ostatnich obliczeń
-    history_text = tk.Label(window, bg='LightGrey', text='Historia:')
-    history_text.grid(row = 7, column = 1)
-    history_text.configure(font=("Calibri", 12)) #sam napis "Historia"
 
-    history_windows = []
-    for i in range(10):
-        history_window = tk.Text(window, height=3, width=20, borderwidth=1, relief='raised')
-        history_window.grid(row=8 + (i // 2) * 6, column=(i % 2) * 3 + 1, columnspan=2, padx=5, pady=5, sticky='w')
-        history_windows.append(history_window)
-        history_window.configure(font=("Calibri", 12))
+def history_btn(window): #button przejścia do historii
+    def open_history_window(): #okno z histrią
+        history= tk.Toplevel()
+        history.geometry('350x370')
+        history.title('HISTORIA')
+        history.configure(bg='LightSkyBlue1')
+        history_windows = []
+        for i in range(10):
+            history_window = tk.Text(history, height=3, width=20, borderwidth=1, relief='raised')
+            history_window.grid(row=8 + (i // 2) * 6, column=(i % 2) * 3, columnspan=2, padx=5, pady=5, sticky='w')
+            history_windows.append(history_window)
+            history_window.configure(font=("Calibri", 12))
+
+        return history_windows
+
+    history_button = tk.Button(window, text='HISTORIA', bg='LightSkyBlue1', borderwidth=1, command=open_history_window())
+    history_button.grid(row=10, column=0, columnspan=6, ipadx=20, ipady=20, pady=10)
+    window.grid_columnconfigure(2, weight=1)
+
+    return history_button
 
 
-    return history_text, history_windows
 
 def graph_btn(window): #button przejścia do graficznego
     def open_graph_window():
         graph_window = tk.Toplevel()
         graph_window.geometry('500x600')
-        graph_window.title('Kalkulator graficzny')
+        graph_window.title('KALKULATOR GRAFICZNY')
         graph_window.configure(bg='LightSkyBlue1')
         return graph_window
 
     graph_window = open_graph_window()
 
-    graph_button = tk.Button(window, text='Kalkulator graficzny', bg='LightSkyBlue1', borderwidth=1, command=open_graph_window)
-    graph_button.grid(row=40, column=1, columnspan=6, ipadx=20, ipady=20, pady=10)
+    graph_button = tk.Button(window, text='KALKULATOR GRAFICZNY', bg='LightSkyBlue1', borderwidth=1, command=open_graph_window)
+    graph_button.grid(row=40, column=0, columnspan=6, ipadx=20, ipady=20, pady=10)
     window.grid_columnconfigure(2, weight=1)
 
     def calc_cell(graph_window):
