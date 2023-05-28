@@ -208,9 +208,8 @@ if __name__ == '__main__':
     window = calculator()
     cell = calc_cell(window)
     buttons = calc_buttons(window, cell)
-    history_text = calc_history(window)
     graph_button, graph_window = graph_btn(window)
-
+    history_button = history_btn(window)
     g_cell = calc_cell(graph_window)
 
     window.mainloop()
