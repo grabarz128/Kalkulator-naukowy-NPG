@@ -181,18 +181,15 @@ def graph_btn(window): #button przejścia do graficznego
     graph_button.grid(row=40, column=1, columnspan=6, ipadx=20, ipady=20, pady=10)
     window.grid_columnconfigure(2, weight=1)
 
-    def calc_cell(graph_window):
-        g_cell = tk.Entry(graph_window, borderwidth=3, highlightcolor='white', justify='center')
-        g_cell.grid(row=1, columnspan=6, ipadx=50, ipady=10)
-        graph_window.grid_columnconfigure(0, weight=1)
-        g_cell.configure(font=("Calibri", 14))
-
-        return g_cell
-
     return graph_button, graph_window
 
+def calc_graph_cell(graph_window):
+    g_cell = tk.Entry(graph_window, borderwidth=3, highlightcolor='white', justify='center')
+    g_cell.grid(row=1, columnspan=6, ipadx=50, ipady=10)
+    graph_window.grid_columnconfigure(0, weight=1)
+    g_cell.configure(font=("Calibri", 14))
 
-
+    return g_cell
 
 
 if __name__ == '__main__':
@@ -202,6 +199,6 @@ if __name__ == '__main__':
     history_text = calc_history(window)
     graph_button, graph_window = graph_btn(window)
 
-    g_cell = calc_cell(graph_window)
+    g_cell = calc_graph_cell(graph_window)
 
     window.mainloop()
