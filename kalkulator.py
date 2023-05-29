@@ -196,14 +196,15 @@ def graph_btn(window): #button przejścia do graficznego
 
     return graph_button, graph_window
 
+#g_cell_value = tk.StringVar(graph_btn(calculator())[1])
+g_cell_value = tk.StringVar(calculator())
 def calc_graph_cell(graph_window):
-    g_cell = tk.Entry(graph_window, borderwidth=3, highlightcolor='white', justify='center')
+    g_cell = tk.Entry(graph_window, borderwidth=3, highlightcolor='white', justify='center', textvariable=g_cell_value)
     g_cell.grid(row=1, columnspan=6, ipadx=50, ipady=10)
     graph_window.grid_columnconfigure(0, weight=1)
     g_cell.configure(font=("Calibri", 14))
-    g_cell_value = g_cell.get()
-    #print(g_cell_value)
-    return g_cell, g_cell_value
+    #g_cell_value = g_cell.get()
+    return g_cell #, g_cell_value
 
 def graph_this_btn(graph_window):
     button = tk.Button(graph_window, text='Pokaż wykres', command=plot_this)
@@ -211,10 +212,12 @@ def graph_this_btn(graph_window):
     return button
 
 def plot_this():
-    window = calculator()
-    graph_window = (graph_btn(window))[1]
-    fun = (calc_graph_cell(graph_window))[1]
-    plt(fun)
+    #window = calculator()
+    #graph_window = (graph_btn(window))[1]
+    #fun = (calc_graph_cell(graph_window))[1]
+    #fun_str = ''.join(fun)
+    plt(g_cell_value)
+    print(g_cell_value)
 
 
 if __name__ == '__main__':
@@ -227,6 +230,7 @@ if __name__ == '__main__':
     #g_cell = calc_cell(graph_window)
 
     graph_this_button = graph_this_btn(graph_window)
-    graph_cell = calc_graph_cell(graph_window)[0]
+    graph_cell = calc_graph_cell(graph_window)#[0]
+    #print(calc_graph_cell(graph_window)[1])
 
     window.mainloop()

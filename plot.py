@@ -83,5 +83,4 @@ def plt(fun, lim1=-10.0, lim2=10.0, ylim1=-10.0, ylim2=10.0):
 
 
 #plt(log(x)+x**2-3*x+2-10/x)
-
-
+plt(2)
