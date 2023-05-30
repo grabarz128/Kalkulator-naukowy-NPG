@@ -216,8 +216,10 @@ def plot_this():
     #graph_window = (graph_btn(window))[1]
     #fun = (calc_graph_cell(graph_window))[1]
     #fun_str = ''.join(fun)
-    plt(g_cell_value)
-    print(g_cell_value)
+    #plt(g_cell_value)
+    #print(g_cell_value)
+    plt(g_cell_value.get())
+    print(g_cell_value.get())
 
 
 if __name__ == '__main__':
