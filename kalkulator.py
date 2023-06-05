@@ -12,6 +12,7 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
 
 from plot import *
+from liczenie import *
 
 def calculator(): #tworzy okno kalkulatora
     window = tk.Tk()
@@ -23,8 +24,11 @@ def calculator(): #tworzy okno kalkulatora
     return window
 
 
+calc_cell_value = tk.StringVar(calculator())
+
+
 def calc_cell(window): #komórka do wpisywania obliczeń
-    cell = tk.Entry(window, borderwidth = 3, highlightcolor = 'white', justify = 'center')
+    cell = tk.Entry(window, borderwidth = 3, highlightcolor = 'white', justify = 'center', textvariable=calc_cell_value)
     cell.grid(row = 1, columnspan = 6, ipadx = 50, ipady = 10)
     window.grid_columnconfigure(0, weight=1)
     cell.configure(font=("Calibri", 14))
@@ -65,7 +69,6 @@ def calc_buttons(window, cell): #ustawia ustawia cyfry i operatory działań
     button_clr.grid(row=3, column=5, ipadx=10, ipady=5)
     button_clr.configure(width=5, height=2, font=("Calibri", 13))
     buttons.append(button_clr)
-
 
     button_4 = tk.Button(window, text='4', bg='white', borderwidth=0)
     button_4.grid(row=4, column=0, ipadx=10, ipady=5)
@@ -148,19 +151,22 @@ def calc_buttons(window, cell): #ustawia ustawia cyfry i operatory działań
     button_plus.configure(width=5, height=2, font=("Calibri", 13))
     buttons.append(button_plus)
 
+    equal_sign = tk.Button(window, text='=', bg='white', borderwidth=0, command=solve_this)
+    equal_sign.grid(row=6, column=4, columnspan=2, ipadx=64, ipady=21)
+
+    buttons.append(equal_sign)
+
+    return buttons
+'''
     j = 2
     for i in range(len(buttons)):
         if i % 6 == 0:
             j += 1
         margin = 0 if len(symbols[i]) == 1 else 10
         buttons[i].grid(row=j, column=i % 6,  ipady=5)
+'''
 
-    equal_sign = tk.Button(window, text='=', bg='white', borderwidth=0)
-    equal_sign.grid(row=6, column=4, columnspan=2, ipadx=64, ipady=21)
 
-    buttons.append(equal_sign)
-
-    return buttons
 
 
 
@@ -184,7 +190,6 @@ def history_btn(window): #button przejścia do historii
     window.grid_columnconfigure(2, weight=1)
 
     return history_button
-
 
 
 def graph_btn(window): #button przejścia do graficznego
@@ -219,14 +224,20 @@ def graph_this_btn(graph_window):
     return button
 
 def plot_this():
-    #window = calculator()
-    #graph_window = (graph_btn(window))[1]
-    #fun = (calc_graph_cell(graph_window))[1]
-    #fun_str = ''.join(fun)
-    #plt(g_cell_value)
-    #print(g_cell_value)
     plt(g_cell_value.get())
-    print(g_cell_value.get())
+    #print(g_cell_value.get())
+
+
+window = calculator()
+
+def solve_this():
+    expression = calc_cell_value.get()
+    solution = result(expression)
+    calc_cell(window).delete(0, tk.END)
+    #print(solution)
+    #print(calc_cell_value.get())
+    calc_cell(window).insert(0, solution)
+
 
 
 if __name__ == '__main__':
@@ -236,11 +247,9 @@ if __name__ == '__main__':
     graph_button, graph_window = graph_btn(window)
 
     graph_this_button = graph_this_btn(graph_window)
-    graph_cell = calc_graph_cell(graph_window)#[0]
-    #print(calc_graph_cell(graph_window)[1])
+    graph_cell = calc_graph_cell(graph_window)
 
     history_button = history_btn(window)
     g_cell = calc_cell(graph_window)
-
 
     window.mainloop()
