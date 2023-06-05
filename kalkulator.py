@@ -34,8 +34,6 @@ def calc_cell(window): #komórka do wpisywania obliczeń
 
 
 def calc_buttons(window, cell): #ustawia ustawia cyfry i operatory działań
-    symbols = ['7', '8', '9', '/', '\u21BA', 'C', '4', '5', '6', '*', '(', ')', '1', '2', '3', '-', 'x^2', '\u221Ax',
-               '0', ',', '%', '+']
     buttons = []
 
     button_7 = tk.Button(window, text='7', bg='white', borderwidth=0)
