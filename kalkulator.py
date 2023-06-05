@@ -16,7 +16,7 @@ from plot import *
 def calculator(): #tworzy okno kalkulatora
     window = tk.Tk()
 
-    window.geometry('420x800')
+    window.geometry('400x500')
     window.title('Kalkulator prosty')
     window.configure(bg='LightSkyBlue1')
 
@@ -163,33 +163,42 @@ def calc_buttons(window, cell): #ustawia ustawia cyfry i operatory działań
     return buttons
 
 
-def calc_history(window): #10 ostatnich obliczeń
-    history_text = tk.Label(window, bg='LightGrey', text='Historia:')
-    history_text.grid(row = 7, column = 1)
-    history_text.configure(font=("Calibri", 12)) #sam napis "Historia"
 
-    history_windows = []
-    for i in range(10):
-        history_window = tk.Text(window, height=3, width=20, borderwidth=1, relief='raised')
-        history_window.grid(row=8 + (i // 2) * 6, column=(i % 2) * 3 + 1, columnspan=2, padx=5, pady=5, sticky='w')
-        history_windows.append(history_window)
-        history_window.configure(font=("Calibri", 12))
+def history_btn(window): #button przejścia do historii
+    def open_history_window(): #okno z histrią
+        history= tk.Toplevel()
+        history.geometry('350x370')
+        history.title('HISTORIA')
+        history.configure(bg='LightSkyBlue1')
+        history_windows = []
+        for i in range(10):
+            history_window = tk.Text(history, height=3, width=20, borderwidth=1, relief='raised')
+            history_window.grid(row=8 + (i // 2) * 6, column=(i % 2) * 3, columnspan=2, padx=5, pady=5, sticky='w')
+            history_windows.append(history_window)
+            history_window.configure(font=("Calibri", 12))
+
+        return history_windows
+
+    history_button = tk.Button(window, text='HISTORIA', bg='LightSkyBlue1', borderwidth=1, command=open_history_window)
+    history_button.grid(row=10, column=0, columnspan=6, ipadx=20, ipady=20, pady=10)
+    window.grid_columnconfigure(2, weight=1)
+
+    return history_button
 
 
-    return history_text, history_windows
 
 def graph_btn(window): #button przejścia do graficznego
     def open_graph_window():
         graph_window = tk.Toplevel()
         graph_window.geometry('500x600')
-        graph_window.title('Kalkulator graficzny')
+        graph_window.title('KALKULATOR GRAFICZNY')
         graph_window.configure(bg='LightSkyBlue1')
         return graph_window
 
     graph_window = open_graph_window()
 
-    graph_button = tk.Button(window, text='Kalkulator graficzny', bg='LightSkyBlue1', borderwidth=1, command=open_graph_window)
-    graph_button.grid(row=40, column=1, columnspan=6, ipadx=20, ipady=20, pady=10)
+    graph_button = tk.Button(window, text='KALKULATOR GRAFICZNY', bg='LightSkyBlue1', borderwidth=1, command=open_graph_window)
+    graph_button.grid(row=40, column=0, columnspan=6, ipadx=20, ipady=20, pady=10)
     window.grid_columnconfigure(2, weight=1)
 
     return graph_button, graph_window
@@ -224,13 +233,14 @@ if __name__ == '__main__':
     window = calculator()
     cell = calc_cell(window)
     buttons = calc_buttons(window, cell)
-    history_text = calc_history(window)
     graph_button, graph_window = graph_btn(window)
-
-    #g_cell = calc_cell(graph_window)
 
     graph_this_button = graph_this_btn(graph_window)
     graph_cell = calc_graph_cell(graph_window)#[0]
     #print(calc_graph_cell(graph_window)[1])
+
+    history_button = history_btn(window)
+    g_cell = calc_cell(graph_window)
+
 
     window.mainloop()
