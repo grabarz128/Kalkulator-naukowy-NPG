@@ -148,20 +148,20 @@ def calc_buttons(window, cell): #ustawia ustawia cyfry i operatory działań
     button_plus.configure(width=5, height=2, font=("Calibri", 13))
     buttons.append(button_plus)
 
-    j = 2
-    for i in range(len(buttons)):
-        if i % 6 == 0:
-            j += 1
-        margin = 0 if len(symbols[i]) == 1 else 10
-        buttons[i].grid(row=j, column=i % 6,  ipady=5)
-
     equal_sign = tk.Button(window, text='=', bg='white', borderwidth=0)
     equal_sign.grid(row=6, column=4, columnspan=2, ipadx=64, ipady=21)
 
     buttons.append(equal_sign)
 
     return buttons
-
+'''
+    j = 2
+    for i in range(len(buttons)):
+        if i % 6 == 0:
+            j += 1
+        margin = 0 if len(symbols[i]) == 1 else 10
+        buttons[i].grid(row=j, column=i % 6,  ipady=5)
+'''
 
 
 def history_btn(window): #button przejścia do historii
@@ -203,7 +203,8 @@ def graph_btn(window): #button przejścia do graficznego
 
     return graph_button, graph_window
 
-#g_cell_value = tk.StringVar(graph_btn(calculator())[1])
+
+# g_cell_value = tk.StringVar(graph_btn(calculator())[1])
 g_cell_value = tk.StringVar(calculator())
 def calc_graph_cell(graph_window):
     g_cell = tk.Entry(graph_window, borderwidth=3, highlightcolor='white', justify='center', textvariable=g_cell_value)
@@ -236,11 +237,10 @@ if __name__ == '__main__':
     graph_button, graph_window = graph_btn(window)
 
     graph_this_button = graph_this_btn(graph_window)
-    graph_cell = calc_graph_cell(graph_window)#[0]
-    #print(calc_graph_cell(graph_window)[1])
+    graph_cell = calc_graph_cell(graph_window)
 
     history_button = history_btn(window)
-    g_cell = calc_cell(graph_window)
+    # g_cell = calc_cell(graph_window)
 
 
     window.mainloop()
