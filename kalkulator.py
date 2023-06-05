@@ -250,6 +250,5 @@ if __name__ == '__main__':
     graph_cell = calc_graph_cell(graph_window)
 
     history_button = history_btn(window)
-    g_cell = calc_cell(graph_window)
 
     window.mainloop()
