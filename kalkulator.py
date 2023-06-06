@@ -133,7 +133,7 @@ def calc_buttons(window, cell): #ustawia ustawia cyfry i operatory działań
 
     button_0 = tk.Button(window, text='0', bg='white', borderwidth=0)
     button_0.grid(row=6, column=0, ipadx=10, ipady=5)
-    button_0.configure(width=2, height=2, font=("Calibri", 13))
+    button_0.configure(width=5, height=2, font=("Calibri", 13))
     buttons.append(button_0)
 
     button_comma = tk.Button(window, text=',', bg='white', borderwidth=0)
@@ -147,7 +147,7 @@ def calc_buttons(window, cell): #ustawia ustawia cyfry i operatory działań
     buttons.append(button_percent)
 
     button_plus = tk.Button(window, text='+', bg='white', borderwidth=0)
-    button_plus.grid(row=6, column=3, ipadx=0, ipady=5)
+    button_plus.grid(row=6, column=3, ipadx=10, ipady=5)
     button_plus.configure(width=5, height=2, font=("Calibri", 13))
     buttons.append(button_plus)
 
