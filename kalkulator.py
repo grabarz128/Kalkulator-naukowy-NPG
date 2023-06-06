@@ -8,12 +8,11 @@ x = Symbol('x')
 
 import matplotlib
 matplotlib.use("TkAgg")
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-from matplotlib.figure import Figure
 
 from plot import *
 from liczenie import *
 from remember import *
+
 
 def calculator(): #tworzy okno kalkulatora
     window = tk.Tk()
@@ -68,7 +67,6 @@ def calc_buttons(window, cell): #ustawia ustawia cyfry i operatory działań
     button_clr.grid(row=3, column=5, ipadx=10, ipady=5)
     button_clr.configure(width=5, height=2, font=("Calibri", 13))
     buttons.append(button_clr)
-
 
     button_4 = tk.Button(window, text='4', bg='white', borderwidth=0)
     button_4.grid(row=4, column=0, ipadx=10, ipady=5)
@@ -129,7 +127,6 @@ def calc_buttons(window, cell): #ustawia ustawia cyfry i operatory działań
     button_sqrt.grid(row=5, column=5, ipadx=10, ipady=5)
     button_sqrt.configure(width=5, height=2, font=("Calibri", 13))
     buttons.append(button_sqrt)
-
 
     button_0 = tk.Button(window, text='0', bg='white', borderwidth=0)
     button_0.grid(row=6, column=0, ipadx=10, ipady=5)
@@ -196,6 +193,7 @@ def calculate(cell):    #funkcja obliczająca wyrażenie
     cell.delete(0, tk.END)
     cell.insert(tk.END, str(res))
 
+
 def graph_btn(window): #button przejścia do graficznego
     def open_graph_window():
         graph_window = tk.Toplevel()
@@ -214,26 +212,22 @@ def graph_btn(window): #button przejścia do graficznego
 
 
 g_cell_value = tk.StringVar(window)
+
 def calc_graph_cell(graph_window):
     g_cell = tk.Entry(graph_window, borderwidth=3, highlightcolor='white', justify='center', textvariable=g_cell_value)
     g_cell.grid(row=1, columnspan=6, ipadx=50, ipady=10)
     graph_window.grid_columnconfigure(0, weight=1)
     g_cell.configure(font=("Calibri", 14))
-    #g_cell_value = g_cell.get()
-    return g_cell #, g_cell_value
+    return g_cell
+
 
 def graph_this_btn(graph_window):
     button = tk.Button(graph_window, text='Pokaż wykres', command=plot_this)
     button.grid(row=6, column=0, ipadx=10, ipady=5)
     return button
 
+
 def plot_this():
-    #window = calculator()
-    #graph_window = (graph_btn(window))[1]
-    #fun = (calc_graph_cell(graph_window))[1]
-    #fun_str = ''.join(fun)
-    #plt(g_cell_value)
-    #print(g_cell_value)
     plt(g_cell_value.get())
     print(g_cell_value.get())
 
@@ -248,7 +242,5 @@ if __name__ == '__main__':
     graph_cell = calc_graph_cell(graph_window)
 
     history_button = history_btn(window)
-    # g_cell = calc_cell(graph_window)
-
 
     window.mainloop()

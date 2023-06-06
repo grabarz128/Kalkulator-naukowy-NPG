@@ -77,8 +77,19 @@ def add_brackets(fun):
     return fun_str
 
 
+def power(expression):
+    n = expression.find("^")
+
+    while n != -1:
+        expression = expression[:n] + "**" + expression[n + 1:]
+        n = expression.find("^")
+
+    return expression
+
+
 def plt(fun, lim1=-10.0, lim2=10.0, ylim1=-10.0, ylim2=10.0):
-    fun_br = add_brackets(fun)
+    fun_p = power(fun)
+    fun_br = add_brackets(fun_p)
     wykres = plot(fun_br, xlim=[lim1, lim2], ylim=[ylim1, ylim2], line_color='C0', title="", legend=False, xlabel="x", ylabel="y")
 
 
