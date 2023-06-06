@@ -13,6 +13,8 @@ from matplotlib.figure import Figure
 
 from plot import *
 
+from remember import *
+
 def calculator(): #tworzy okno kalkulatora
     window = tk.Tk()
 
@@ -148,7 +150,7 @@ def calc_buttons(window, cell): #ustawia ustawia cyfry i operatory działań
     button_plus.configure(width=5, height=2, font=("Calibri", 13))
     buttons.append(button_plus)
 
-    equal_sign = tk.Button(window, text='=', bg='white', borderwidth=0)
+    equal_sign = tk.Button(window, text='=', bg='white', borderwidth=0, command=lambda: calculate(cell))
     equal_sign.grid(row=6, column=4, columnspan=2, ipadx=64, ipady=21)
 
     buttons.append(equal_sign)
@@ -176,7 +178,7 @@ def history_btn(window): #button przejścia do historii
             history_window.grid(row=8 + (i // 2) * 6, column=(i % 2) * 3, columnspan=2, padx=5, pady=5, sticky='w')
             history_windows.append(history_window)
             history_window.configure(font=("Calibri", 12))
-
+            history_window.insert(tk.END, wpisy[i])
         return history_windows
 
     history_button = tk.Button(window, text='HISTORIA', bg='LightSkyBlue1', borderwidth=1, command=open_history_window)
@@ -185,7 +187,12 @@ def history_btn(window): #button przejścia do historii
 
     return history_button
 
-
+def calculate(cell):    #funkcja obliczająca wyrażenie
+    expression = cell.get()
+    result = expression + ' = ' + str(eval(expression))
+    remember(wpisy, result)
+    cell.delete(0, tk.END)
+    cell.insert(tk.END, str(result))
 
 def graph_btn(window): #button przejścia do graficznego
     def open_graph_window():
