@@ -24,7 +24,9 @@ def calculator(): #tworzy okno kalkulatora
     return window
 
 
-calc_cell_value = tk.StringVar(calculator())
+window = calculator()
+
+calc_cell_value = tk.StringVar(window)
 
 
 def calc_cell(window): #komórka do wpisywania obliczeń
@@ -150,7 +152,6 @@ def calc_buttons(window, cell): #ustawia ustawia cyfry i operatory działań
     button_plus.configure(width=5, height=2, font=("Calibri", 13))
     buttons.append(button_plus)
 
-
     equal_sign = tk.Button(window, text='=', bg='white', borderwidth=0, command=solve_this)
     equal_sign.grid(row=6, column=4, columnspan=2, ipadx=64, ipady=21)
 
@@ -208,8 +209,10 @@ def graph_btn(window): #button przejścia do graficznego
     return graph_button, graph_window
 
 
+graph_window = graph_btn(window)[1]
+
 # g_cell_value = tk.StringVar(graph_btn(calculator())[1])
-g_cell_value = tk.StringVar(calculator())
+g_cell_value = tk.StringVar(graph_window)
 def calc_graph_cell(graph_window):
     g_cell = tk.Entry(graph_window, borderwidth=3, highlightcolor='white', justify='center', textvariable=g_cell_value)
     g_cell.grid(row=1, columnspan=6, ipadx=50, ipady=10)
@@ -227,8 +230,6 @@ def plot_this():
     plt(g_cell_value.get())
     print(g_cell_value.get())
 
-
-window = calculator()
 
 def solve_this():
     expression = calc_cell_value.get()
