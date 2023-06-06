@@ -156,23 +156,33 @@ def calc_buttons(window, cell): #ustawia ustawia cyfry i operatory działań
 def history_btn(window): #button przejścia do historii
     def open_history_window(): #okno z histrią
         history= tk.Toplevel()
-        history.geometry('350x370')
+        history.geometry('398x650')
         history.title('HISTORIA')
         history.configure(bg='LightSkyBlue1')
         history_windows = []
         for i in range(10):
-            history_window = tk.Text(history, height=3, width=20, borderwidth=1, relief='raised')
-            history_window.grid(row=8 + (i // 2) * 6, column=(i % 2) * 3, columnspan=2, padx=5, pady=5, sticky='w')
+            history_window = tk.Text(history, height=3, width=48, borderwidth=1, relief='raised')
+            history_window.grid(row = i, column = 0, padx=5, pady=2, sticky = 'w' )
             history_windows.append(history_window)
             history_window.configure(font=("Calibri", 12))
-
+            history_window.insert(tk.END, wpisy[i])
         return history_windows
+        def get_history(history_windows):
+            for i in range(10):
+                if i < len(wpisy):
+                    history_windows[i].delete('1.0', tk.END)
+                    history_windows[i].insert(tk.END, wpisy[i])
 
-    history_button = tk.Button(window, text='HISTORIA', bg='LightSkyBlue1', borderwidth=1, command=open_history_window())
+        get_history(history_windows)
+
+
+
+    history_button = tk.Button(window, text='HISTORIA', bg='LightSkyBlue1', borderwidth=1, command=open_history_window)
     history_button.grid(row=10, column=0, columnspan=6, ipadx=20, ipady=20, pady=10)
     window.grid_columnconfigure(2, weight=1)
 
     return history_button
+
 
 
 
