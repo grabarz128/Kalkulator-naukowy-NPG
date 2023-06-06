@@ -8,11 +8,11 @@ x = Symbol('x')
 
 import matplotlib
 matplotlib.use("TkAgg")
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-from matplotlib.figure import Figure
 
 from plot import *
 from liczenie import *
+from remember import *
+
 
 def calculator(): #tworzy okno kalkulatora
     window = tk.Tk()
@@ -26,16 +26,15 @@ def calculator(): #tworzy okno kalkulatora
 
 window = calculator()
 
-calc_cell_value = tk.StringVar(window)
-
 
 def calc_cell(window): #komórka do wpisywania obliczeń
-    cell = tk.Entry(window, borderwidth = 3, highlightcolor = 'white', justify = 'center', textvariable=calc_cell_value)
+    cell = tk.Entry(window, borderwidth = 3, highlightcolor = 'white', justify = 'center')
     cell.grid(row = 1, columnspan = 6, ipadx = 50, ipady = 10)
     window.grid_columnconfigure(0, weight=1)
     cell.configure(font=("Calibri", 14))
 
     return cell
+
 
 
 def calc_buttons(window, cell): #ustawia ustawia cyfry i operatory działań
@@ -131,7 +130,6 @@ def calc_buttons(window, cell): #ustawia ustawia cyfry i operatory działań
     button_sqrt.configure(width=5, height=2, font=("Calibri", 13))
     buttons.append(button_sqrt)
 
-
     button_0 = tk.Button(window, text='0', bg='white', borderwidth=0)
     button_0.grid(row=6, column=0, ipadx=10, ipady=5)
     button_0.configure(width=2, height=2, font=("Calibri", 13))
@@ -152,7 +150,7 @@ def calc_buttons(window, cell): #ustawia ustawia cyfry i operatory działań
     button_plus.configure(width=5, height=2, font=("Calibri", 13))
     buttons.append(button_plus)
 
-    equal_sign = tk.Button(window, text='=', bg='white', borderwidth=0, command=solve_this)
+    equal_sign = tk.Button(window, text='=', bg='white', borderwidth=0, command=lambda: calculate(cell))
     equal_sign.grid(row=6, column=4, columnspan=2, ipadx=64, ipady=21)
 
     buttons.append(equal_sign)
@@ -168,8 +166,6 @@ def calc_buttons(window, cell): #ustawia ustawia cyfry i operatory działań
 '''
 
 
-
-
 def history_btn(window): #button przejścia do historii
     def open_history_window(): #okno z histrią
         history= tk.Toplevel()
@@ -182,7 +178,7 @@ def history_btn(window): #button przejścia do historii
             history_window.grid(row=8 + (i // 2) * 6, column=(i % 2) * 3, columnspan=2, padx=5, pady=5, sticky='w')
             history_windows.append(history_window)
             history_window.configure(font=("Calibri", 12))
-
+            history_window.insert(tk.END, wpisy[i])
         return history_windows
 
     history_button = tk.Button(window, text='HISTORIA', bg='LightSkyBlue1', borderwidth=1, command=open_history_window)
@@ -190,6 +186,14 @@ def history_btn(window): #button przejścia do historii
     window.grid_columnconfigure(2, weight=1)
 
     return history_button
+
+
+def calculate(cell):    #funkcja obliczająca wyrażenie
+    expression = cell.get()
+    res = expression + ' = ' + str(result(expression))
+    remember(wpisy, res)
+    cell.delete(0, tk.END)
+    cell.insert(tk.END, str(res))
 
 
 def graph_btn(window): #button przejścia do graficznego
@@ -209,39 +213,30 @@ def graph_btn(window): #button przejścia do graficznego
     return graph_button, graph_window
 
 
-graph_window = graph_btn(window)[1]
+g_cell_value = tk.StringVar(window)
 
-# g_cell_value = tk.StringVar(graph_btn(calculator())[1])
-g_cell_value = tk.StringVar(graph_window)
+
 def calc_graph_cell(graph_window):
     g_cell = tk.Entry(graph_window, borderwidth=3, highlightcolor='white', justify='center', textvariable=g_cell_value)
     g_cell.grid(row=1, columnspan=6, ipadx=50, ipady=10)
     graph_window.grid_columnconfigure(0, weight=1)
     g_cell.configure(font=("Calibri", 14))
-    #g_cell_value = g_cell.get()
-    return g_cell #, g_cell_value
+    return g_cell
+
 
 def graph_this_btn(graph_window):
     button = tk.Button(graph_window, text='Pokaż wykres', command=plot_this)
     button.grid(row=6, column=0, ipadx=10, ipady=5)
     return button
 
+
 def plot_this():
     plt(g_cell_value.get())
     print(g_cell_value.get())
 
 
-def solve_this():
-    expression = calc_cell_value.get()
-    solution = result(expression)
-    calc_cell(window).delete(0, tk.END)
-    #print(solution)
-    #print(calc_cell_value.get())
-    calc_cell(window).insert(0, solution)
-
-
 if __name__ == '__main__':
-    window = calculator()
+    #window = calculator()
     cell = calc_cell(window)
     buttons = calc_buttons(window, cell)
     graph_button, graph_window = graph_btn(window)
