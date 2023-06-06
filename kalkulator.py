@@ -12,7 +12,7 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
 
 from plot import *
-
+from liczenie import *
 from remember import *
 
 def calculator(): #tworzy okno kalkulatora
@@ -24,6 +24,7 @@ def calculator(): #tworzy okno kalkulatora
 
     return window
 
+window = calculator()
 
 def calc_cell(window): #komórka do wpisywania obliczeń
     cell = tk.Entry(window, borderwidth = 3, highlightcolor = 'white', justify = 'center')
@@ -187,12 +188,13 @@ def history_btn(window): #button przejścia do historii
 
     return history_button
 
+
 def calculate(cell):    #funkcja obliczająca wyrażenie
     expression = cell.get()
-    result = expression + ' = ' + str(eval(expression))
-    remember(wpisy, result)
+    res = expression + ' = ' + str(result(expression))
+    remember(wpisy, res)
     cell.delete(0, tk.END)
-    cell.insert(tk.END, str(result))
+    cell.insert(tk.END, str(res))
 
 def graph_btn(window): #button przejścia do graficznego
     def open_graph_window():
@@ -211,8 +213,7 @@ def graph_btn(window): #button przejścia do graficznego
     return graph_button, graph_window
 
 
-# g_cell_value = tk.StringVar(graph_btn(calculator())[1])
-g_cell_value = tk.StringVar(calculator())
+g_cell_value = tk.StringVar(window)
 def calc_graph_cell(graph_window):
     g_cell = tk.Entry(graph_window, borderwidth=3, highlightcolor='white', justify='center', textvariable=g_cell_value)
     g_cell.grid(row=1, columnspan=6, ipadx=50, ipady=10)
@@ -238,7 +239,7 @@ def plot_this():
 
 
 if __name__ == '__main__':
-    window = calculator()
+    #window = calculator()
     cell = calc_cell(window)
     buttons = calc_buttons(window, cell)
     graph_button, graph_window = graph_btn(window)

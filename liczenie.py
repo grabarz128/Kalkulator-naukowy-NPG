@@ -6,7 +6,7 @@ def result(expression):
         expression = expression[:n] + "**" + expression[n+1:]
         n = expression.find("^")
     print(expression)
-    print(eval(expression))
+    return eval(expression)
 
 
 n = str(input())
