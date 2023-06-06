@@ -163,7 +163,14 @@ def calc_buttons(window, cell): #ustawia ustawia cyfry i operatory działań
         buttons[i].grid(row=j, column=i % 6,  ipady=5)
 '''
 
-
+def calculate(cell):    #funkcja obliczająca wyrażenie
+    expression = cell.get()
+    res = str(expression) + ' = ' + str(result(expression))
+    remember(wpisy, res)
+    cell.delete(0, tk.END)
+    cell.insert(tk.END, str(res))
+    
+    
 def history_btn(window): #button przejścia do historii
     def open_history_window(): #okno z histrią
         history= tk.Toplevel()
@@ -186,22 +193,11 @@ def history_btn(window): #button przejścia do historii
 
         get_history(history_windows)
 
-
-
     history_button = tk.Button(window, text='HISTORIA', bg='LightSkyBlue1', borderwidth=1, command=open_history_window)
     history_button.grid(row=10, column=0, columnspan=6, ipadx=20, ipady=20, pady=10)
     window.grid_columnconfigure(2, weight=1)
 
     return history_button
-
-
-
-def calculate(cell):    #funkcja obliczająca wyrażenie
-    expression = cell.get()
-    res = expression + ' = ' + str(result(expression))
-    remember(wpisy, res)
-    cell.delete(0, tk.END)
-    cell.insert(tk.END, str(res))
 
 
 def graph_btn(window): #button przejścia do graficznego
