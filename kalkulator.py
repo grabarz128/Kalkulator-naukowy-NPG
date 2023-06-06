@@ -36,7 +36,6 @@ def calc_cell(window): #komórka do wpisywania obliczeń
     return cell
 
 
-
 def calc_buttons(window, cell): #ustawia ustawia cyfry i operatory działań
     buttons = []
 
@@ -151,6 +150,7 @@ def calc_buttons(window, cell): #ustawia ustawia cyfry i operatory działań
     button_plus.configure(width=5, height=2, font=("Calibri", 13))
     buttons.append(button_plus)
 
+
     equal_sign = tk.Button(window, text='=', bg='white', borderwidth=0, command=solve_this)
     equal_sign.grid(row=6, column=4, columnspan=2, ipadx=64, ipady=21)
 
@@ -165,7 +165,6 @@ def calc_buttons(window, cell): #ustawia ustawia cyfry i operatory działań
         margin = 0 if len(symbols[i]) == 1 else 10
         buttons[i].grid(row=j, column=i % 6,  ipady=5)
 '''
-
 
 
 
@@ -208,7 +207,8 @@ def graph_btn(window): #button przejścia do graficznego
 
     return graph_button, graph_window
 
-#g_cell_value = tk.StringVar(graph_btn(calculator())[1])
+
+# g_cell_value = tk.StringVar(graph_btn(calculator())[1])
 g_cell_value = tk.StringVar(calculator())
 def calc_graph_cell(graph_window):
     g_cell = tk.Entry(graph_window, borderwidth=3, highlightcolor='white', justify='center', textvariable=g_cell_value)
@@ -225,7 +225,7 @@ def graph_this_btn(graph_window):
 
 def plot_this():
     plt(g_cell_value.get())
-    #print(g_cell_value.get())
+    print(g_cell_value.get())
 
 
 window = calculator()
@@ -237,7 +237,6 @@ def solve_this():
     #print(solution)
     #print(calc_cell_value.get())
     calc_cell(window).insert(0, solution)
-
 
 
 if __name__ == '__main__':
