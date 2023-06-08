@@ -18,11 +18,9 @@ from math import *
 
 def calculator(): #tworzy okno kalkulatora
     window = tk.Tk()
-
     window.geometry('400x500')
-    window.title('Kalkulator prosty')
+    window.title('KALKULATOR PROSTY')
     window.configure(bg='LightSkyBlue1')
-
     return window
 
 window = calculator()
@@ -220,7 +218,7 @@ def history_btn(window): #button przejścia do historii
 def graph_btn(window): #button przejścia do graficznego
     def open_graph_window():
         graph_window = tk.Toplevel()
-        graph_window.geometry('500x600')
+        graph_window.geometry('400x100')
         graph_window.title('KALKULATOR GRAFICZNY')
         graph_window.configure(bg='LightSkyBlue1')
         return graph_window
@@ -265,14 +263,9 @@ def plot_this():
 
 
 if __name__ == '__main__':
-    #window = calculator()
     cell = calc_cell(window)
     buttons = calc_buttons(window, cell)
-    graph_button, graph_window = graph_btn(window)
-
-    graph_this_button = graph_this_btn(graph_window)
-    graph_cell = calc_graph_cell(graph_window)
-
+    graph_button = graph_btn(window)
     history_button = history_btn(window)
 
     g_cell = calc_graph_cell(graph_window)
