@@ -1,14 +1,11 @@
-# zapamiętywanie 10 ostatnich wpisów
-
-def remember(wpisy, nowy_wpis):
+def remember(wpisy, nowy_wpis): # zapamiętywanie 10 ostatnich wpisów
     if len(wpisy) == 10:
         wpisy.pop()
     wpisy.insert(0, nowy_wpis)
 
-wpisy = []
+wpisy = [''] * 10
 
-remember(wpisy, 'Pierwszy wpis')
-remember(wpisy, 'Drugi wpis')
-remember(wpisy, 'Trzeci wpis')
-
-print(wpisy)
+# def click_equals():
+#     expression = cell.get()
+#     cell_label = Label(window, text=expression)
+#     cell_label.
