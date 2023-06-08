@@ -214,47 +214,39 @@ def history_btn(window): #button przejścia do historii
     return history_button
 
 
-
-def graph_btn(window): #button przejścia do graficznego
-    def open_graph_window():
-        graph_window = tk.Toplevel()
-        graph_window.geometry('400x100')
-        graph_window.title('KALKULATOR GRAFICZNY')
-        graph_window.configure(bg='LightSkyBlue1')
-        return graph_window
-
-    graph_window = open_graph_window()
-
-    graph_button = tk.Button(window, text='KALKULATOR GRAFICZNY', bg='LightSkyBlue1', borderwidth=1, command=open_graph_window)
-    graph_button.grid(row=40, column=0, columnspan=6, ipadx=20, ipady=20, pady=10)
-    window.grid_columnconfigure(2, weight=1)
-
-    return graph_button, graph_window
-
-
+def open_graph_window():
+    graph_window = tk.Toplevel()
+    graph_window.geometry('400x100')
+    graph_window.title('KALKULATOR GRAFICZNY')
+    graph_window.configure(bg='LightSkyBlue1')
+    return graph_window
 
 g_cell_value = tk.StringVar(window)
-
 def calc_graph_cell(graph_window):
     g_cell = tk.Entry(graph_window, borderwidth=3, highlightcolor='white', justify='center', textvariable=g_cell_value)
     g_cell.grid(row=1, columnspan=6, ipadx=50, ipady=10)
     graph_window.grid_columnconfigure(0, weight=1)
     g_cell.configure(font=("Calibri", 14))
-    return g_cell
-
-
-def calc_graph_cell(graph_window):
-    g_cell = tk.Entry(graph_window, borderwidth=3, highlightcolor='white', justify='center')
-    g_cell.grid(row=1, columnspan=6, ipadx=50, ipady=10)
-    graph_window.grid_columnconfigure(0, weight=1)
-    g_cell.configure(font=("Calibri", 14))
-    return g_cell
+    #g_cell_value = g_cell.get()
+    return g_cell #, g_cell_value
 
 def graph_this_btn(graph_window):
     button = tk.Button(graph_window, text='Pokaż wykres', command=plot_this)
     button.grid(row=6, column=0, ipadx=10, ipady=5)
     return button
 
+
+def graph_btn(window): #button przejścia do graficznego
+        def open_graph_window2():
+        graph_window = open_graph_window()
+        graph_this_button = graph_this_btn(graph_window)
+        graph_cell = calc_graph_cell(graph_window)
+
+    graph_button = tk.Button(window, text='KALKULATOR GRAFICZNY', bg='LightSkyBlue1', borderwidth=1, command=open_graph_window)
+    graph_button.grid(row=40, column=0, columnspan=6, ipadx=20, ipady=20, pady=10)
+    window.grid_columnconfigure(2, weight=1)
+
+    return graph_button
 
 
 def plot_this():
@@ -267,8 +259,6 @@ if __name__ == '__main__':
     buttons = calc_buttons(window, cell)
     graph_button = graph_btn(window)
     history_button = history_btn(window)
-
-    g_cell = calc_graph_cell(graph_window)
 
 
     window.mainloop()
