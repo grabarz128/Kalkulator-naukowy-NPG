@@ -33,7 +33,12 @@ def calc_cell(window): #komórka do wpisywania obliczeń
 
     return cell
 
-
+def calculate(cell):    #funkcja obliczająca wyrażenie
+    expression = cell.get()
+    res = str(expression) + ' = ' + str(result(expression))
+    remember(wpisy, res)
+    cell.delete(0, tk.END)
+    cell.insert(tk.END, str(res))
 
 def calc_buttons(window, cell): #ustawia ustawia cyfry i operatory działań
     buttons = []
@@ -175,14 +180,6 @@ def clear():  #funkcja czyszczaca pole do wpisywania
 def last(): #funkcja zwracająca ostatnie równanie
     cell.delete(0, tk.END)
     cell.insert(tk.END, wpisy[0])
-
-
-def calculate(cell):    #funkcja obliczająca wyrażenie
-    expression = cell.get()
-    res = str(expression) + ' = ' + str(result(expression))
-    remember(wpisy, res)
-    cell.delete(0, tk.END)
-    cell.insert(tk.END, str(res))
     
     
 def history_btn(window): #button przejścia do historii
@@ -242,7 +239,7 @@ def graph_btn(window): #button przejścia do graficznego
         graph_this_button = graph_this_btn(graph_window)
         graph_cell = calc_graph_cell(graph_window)
 
-    graph_button = tk.Button(window, text='KALKULATOR GRAFICZNY', bg='LightSkyBlue1', borderwidth=1, command=open_graph_window)
+    graph_button = tk.Button(window, text='KALKULATOR GRAFICZNY', bg='LightSkyBlue1', borderwidth=1, command=open_graph_window2)
     graph_button.grid(row=40, column=0, columnspan=6, ipadx=20, ipady=20, pady=10)
     window.grid_columnconfigure(2, weight=1)
 
