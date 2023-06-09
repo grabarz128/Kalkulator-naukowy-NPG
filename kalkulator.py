@@ -194,13 +194,16 @@ def history_btn(window): #button przejścia do historii
             history_window.grid(row = i, column = 0, padx=5, pady=2, sticky = 'w' )
             history_windows.append(history_window)
             history_window.configure(font=("Calibri", 12))
-            history_window.insert(tk.END, wpisy[i])
+            history_window.insert(tk.END, '\n' + wpisy[i])
+            history_window.tag_configure( "center", justify='center')
+            history_window.tag_add("center", "1.0", "end")
         return history_windows
         def get_history(history_windows):
             for i in range(10):
                 if i < len(wpisy):
                     history_windows[i].delete('1.0', tk.END)
-                    history_windows[i].insert(tk.END, wpisy[i])
+                    history_windows[i].insert(tk.END,'\n' + wpisy[i], justify='center')
+                    history_windows[i].tag_add("center", "1.0", "end")
 
         get_history(history_windows)
 
