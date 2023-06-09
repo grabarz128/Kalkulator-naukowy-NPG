@@ -12,7 +12,9 @@ matplotlib.use("TkAgg")
 from plot import *
 from liczenie import *
 from remember import *
+from obliczanie_pierwiastków_wielomianu import *
 from math import *
+
 
 
 
@@ -213,25 +215,45 @@ def history_btn(window): #button przejścia do historii
 
 def open_graph_window():
     graph_window = tk.Toplevel()
-    graph_window.geometry('400x100')
+    graph_window.geometry('400x250')
     graph_window.title('KALKULATOR GRAFICZNY')
     graph_window.configure(bg='LightSkyBlue1')
     return graph_window
 
 g_cell_value = tk.StringVar(window)
+
+g_cell_root = g_cell_value
+
 def calc_graph_cell(graph_window):
     g_cell = tk.Entry(graph_window, borderwidth=3, highlightcolor='white', justify='center', textvariable=g_cell_value)
-    g_cell.grid(row=1, columnspan=6, ipadx=50, ipady=10)
+    g_cell.grid(row=1, columnspan=6, ipadx=50, ipady=10, pady=10)
     graph_window.grid_columnconfigure(0, weight=1)
     g_cell.configure(font=("Calibri", 14))
     #g_cell_value = g_cell.get()
     return g_cell #, g_cell_value
+
+def calc_graph_cell2(graph_window):
+    g_cell2 = tk.Entry(graph_window, borderwidth=3, highlightcolor='white', justify='center')
+    g_cell2.grid(row=10, columnspan=6, ipadx=50, ipady=10, pady=10)
+    graph_window.grid_columnconfigure(0, weight=1)
+    g_cell2.configure(font=("Calibri", 14))
+    #g_cell_value = g_cell.get()
+    return g_cell2 #, g_cell_value
+
+def graph_calc_btn(graph_window):
+    button = tk.Button(graph_window, text='Oblicz pierwiastki', command=calc_roots)
+    button.grid(row=20, column=0, ipadx=10, ipady=5)
+    return button
 
 def graph_this_btn(graph_window):
     button = tk.Button(graph_window, text='Pokaż wykres', command=plot_this)
     button.grid(row=6, column=0, ipadx=10, ipady=5)
     return button
 
+def calc_roots():
+    result = return_poly(g_cell_root.get())
+    g_cell2.delete(0, tk.END)
+    g_cell2.insert(tk.END, str(result))
 
 def graph_btn(window): #button przejścia do graficznego
         
@@ -239,6 +261,11 @@ def graph_btn(window): #button przejścia do graficznego
         graph_window = open_graph_window()
         graph_this_button = graph_this_btn(graph_window)
         graph_cell = calc_graph_cell(graph_window)
+        
+        global g_cell2 
+        g_cell2 = calc_graph_cell2(graph_window)
+        graph_calc_bt = graph_calc_btn(graph_window)
+       
         
     graph_button = tk.Button(window, text='KALKULATOR GRAFICZNY', bg='LightSkyBlue1', borderwidth=1, command=open_graph_window2)
     graph_button.grid(row=40, column=0, columnspan=6, ipadx=20, ipady=20, pady=10)
@@ -257,6 +284,6 @@ if __name__ == '__main__':
     buttons = calc_buttons(window, cell)
     graph_button = graph_btn(window)
     history_button = history_btn(window)
-
+    
 
     window.mainloop()
