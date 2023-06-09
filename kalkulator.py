@@ -234,11 +234,12 @@ def graph_this_btn(graph_window):
 
 
 def graph_btn(window): #button przejścia do graficznego
-        def open_graph_window2():
+        
+    def open_graph_window2():
         graph_window = open_graph_window()
         graph_this_button = graph_this_btn(graph_window)
         graph_cell = calc_graph_cell(graph_window)
-
+        
     graph_button = tk.Button(window, text='KALKULATOR GRAFICZNY', bg='LightSkyBlue1', borderwidth=1, command=open_graph_window2)
     graph_button.grid(row=40, column=0, columnspan=6, ipadx=20, ipady=20, pady=10)
     window.grid_columnconfigure(2, weight=1)
