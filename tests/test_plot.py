@@ -14,5 +14,5 @@ class PlotTest(unittest.TestCase):
     def test_power(self):
         self.assertEqual(power('x^2'), 'x**2')
 
-    # def test_add_brackets(self):
-    #     self.assertEqual(add_brackets('x+1/x+2*x+x**2'), '(x+(1/x)+(2*x)+(x**2))')
+    def test_add_brackets(self):
+        self.assertEqual(add_brackets('log(x)+x**2-3*x+2-10/x'), '(log(x)+(x**2)-(3*x)+2-(10/x))')
