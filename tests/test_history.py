@@ -5,7 +5,7 @@ import unittest
 
 from kalkulator import *
 
-class OperatorsTest(unittest.TestCase):
+class HistoryTest(unittest.TestCase):
     def setUp(self):
         self.window = calculator()
         self.cell = calc_cell(self.window)
