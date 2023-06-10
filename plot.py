@@ -47,7 +47,7 @@ def add_brackets(fun):
                     break
                 idx_br = fun_str.find('(', idx_br + 1)
             fun_str = fun_str[:idx_br] + '(' + fun_str[idx_br + 1:]
-        # print(fun_str)
+        #print(fun_str)
 
 
     idx = 0
@@ -92,6 +92,7 @@ def add_brackets(fun):
             idx_frw += 1
         while true:
             if fun_str[idx_bck] in operators or fun_str[idx_bck] == ')' or idx_bck == 0:
+                idx_bck +=1
                 #print('bck=', idx_bck)
                 #print(fun_str[idx_bck])
                 break
@@ -115,7 +116,17 @@ def add_brackets(fun):
         #print(fun_str)
 
     fun_str = '(' + fun_str + ')'
-    # print(fun_str)
+    idx = 0
+    while true:
+        idx = fun_str.find(' ', idx)
+        if idx == -1:
+            break
+        #print(idx)
+        #print(fun_str)
+        fun_str = fun_str[:idx] + fun_str[idx+1:]
+        idx += 1
+
+    #print(fun_str)
     return fun_str
 
 
