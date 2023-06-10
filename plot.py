@@ -54,13 +54,14 @@ def add_brackets(fun):
     idx_frw = 0
     idx_m = 0
     idx_d = 0
-    # szukanie mnozenia lub dzielenia
+        # szukanie mnozenia lub dzielenia
     while true:
         idx_frw_n = idx_frw
-        # print(fun_str.find('*', idx_frw_n))
-        # print(fun_str.find('**', idx_frw_n))
-        while fun_str.find('*', idx_frw_n) == fun_str.find('**', idx_frw_n):
+        #print(fun_str.find('*', idx_frw_n))
+        #print(fun_str.find('**', idx_frw_n))
+        while fun_str.find('*', idx_frw_n) == fun_str.find('**', idx_frw_n) and fun_str.find('*', idx_frw_n) != -1:
             idx_frw_n = fun_str.find('**', idx_frw_n) + 2
+            #print('jest')
             if fun_str.find('*', idx_frw_n) == -1:
                 break
         idx_m = fun_str.find('*', idx_frw_n)
@@ -75,39 +76,43 @@ def add_brackets(fun):
             idx = idx_m
         else:
             idx = idx_d
-        # print('idx_m =', idx_m)
-        # print('idx_d =', idx_d)
-        # print('idx =', idx)
-        # print(fun_str[idx])
+        #print('idx_m =', idx_m)
+        #print('idx_d =', idx_d)
+        #print('idx =', idx)
+        #print(fun_str[idx])
 
         idx_frw = idx + 1
         idx_bck = idx - 1
 
         while true:
             if fun_str[idx_frw] in operators or fun_str[idx_frw] == '(' or idx_frw == len(fun_str) - 1:
-                # print(idx_frw)
-                # print(fun_str[idx_frw])
+                #print('frwd=', idx_frw)
+                #print(fun_str[idx_frw])
                 break
             idx_frw += 1
         while true:
             if fun_str[idx_bck] in operators or fun_str[idx_bck] == ')' or idx_bck == 0:
-                # print(idx_bck)
-                # print(fun_str[idx_bck])
+                #print('bck=', idx_bck)
+                #print(fun_str[idx_bck])
                 break
             idx_bck -= 1
-        if fun_str[idx_frw] != '(':
+        if fun_str[idx_frw] != '(' and idx_frw != len(fun_str) - 1:
             fun_str = fun_str[:idx_frw] + ')' + fun_str[idx_frw:]
+        elif idx_frw == len(fun_str) - 1:
+            fun_str = fun_str[:] + ')'
         else:
             fun_str = fun_str[:fun_str.find(')', idx_frw) + 1] + ')' + fun_str[fun_str.find(')', idx_frw) + 1:]
             # print(fun_str)
-        if fun_str[idx_bck] != ')':
+        if fun_str[idx_bck] != ')' and idx_bck != 0:
             fun_str = fun_str[:idx_bck] + '(' + fun_str[idx_bck:]
+        elif idx_bck == 0:
+            fun_str = '(' + fun_str
         else:
             while idx_br < idx_bck:
                 idx_br = fun_str.find('(', idx_br + 1)
             fun_str = fun_str[:idx_br] + '(' + fun_str[idx_br + 1:]
         idx_frw += 2
-        # print(fun_str)
+        #print(fun_str)
 
     fun_str = '(' + fun_str + ')'
     # print(fun_str)
